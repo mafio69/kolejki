@@ -1,0 +1,34 @@
+### Tworzenie nowej kolejki górskiej
+# Zapisuje ID nowej kolejki do zmiennej `coaster_id`
+POST http://localhost:8080/api/coasters
+Content-Type: application/json
+
+{
+  "liczba_personelu": 16,
+  "liczba_klientow": 60000,
+  "dl_trasy": 1800,
+  "godziny_od": "8:00",
+  "godziny_do": "16:00"
+}
+
+> {% client.global.set("coaster_id", response.body.coaster_id); %}
+
+###
+
+### Dodawanie wagonu do kolejki
+# Używa zmiennej `coaster_id` i zapisuje ID nowego wagonu do zmiennej `wagon_id`
+POST http://localhost:8080/api/coasters/{{coaster_id}}/wagons
+Content-Type: application/json
+
+{
+  "ilosc_miejsc": 32,
+  "predkosc_wagonu": 1.2
+}
+
+> {% client.global.set("wagon_id", response.body.wagon_id); %}
+
+###
+
+### Usuwanie wagonu z kolejki
+# Używa zmiennych `coaster_id` i `wagon_id`
+DELETE http://localhost:8080/api/coasters/{{coaster_id}}/wagons/{{wagon_id}}

@@ -1,0 +1,4 @@
+services:
+  php:
+    environment:
+      - CI_ENVIRONMENT=production

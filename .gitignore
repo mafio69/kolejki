@@ -1,0 +1,32 @@
+# Composer dependencies
+vendor/
+
+# CodeIgniter writable directory
+writable/
+
+# Build artifacts
+builds/
+app/build/
+
+# Logs
+logs/
+app/writable/logs/
+
+# Environment variables
+.env
+app/env
+
+# IDE files
+.idea/
+
+# Docker overrides (if local and not meant for version control)
+docker-compose.override.yml
+
+# OS specific files
+*.Zone.Identifier
+
+# Composer lock file (if not managed by main project composer)
+# app/composer.lock # Uncomment if you want to ignore this
+
+# Public directory generated files (if any)
+# app/public/uploads/ # Example, uncomment if needed
