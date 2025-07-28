@@ -2,7 +2,11 @@
 
 namespace Config;
 
+use App\Models\CoasterRepository;
+use App\Models\WagonRepository;
+use App\Services\CoasterService;
 use CodeIgniter\Config\BaseService;
+use Redis;
 
 /**
  * Services Configuration file.
@@ -19,14 +23,42 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-    /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
-     */
+    public static function redis($getShared = true): object
+    {
+        if ($getShared) {
+            return static::getSharedInstance('redis');
+        }
+
+        $redis = new Redis();
+        $redis->connect(getenv('REDIS_HOST'), getenv('REDIS_PORT'));
+
+        return $redis;
+    }
+
+    public static function coasterRepository($getShared = true): object
+    {
+        if ($getShared) {
+            return static::getSharedInstance('coasterRepository');
+        }
+
+        return new CoasterRepository(self::redis());
+    }
+
+    public static function wagonRepository($getShared = true): object
+    {
+        if ($getShared) {
+            return static::getSharedInstance('wagonRepository');
+        }
+
+        return new WagonRepository(self::redis());
+    }
+
+    public static function coasterService($getShared = true): object
+    {
+        if ($getShared) {
+            return static::getSharedInstance('coasterService');
+        }
+
+        return new CoasterService(self::coasterRepository());
+    }
 }

@@ -6,12 +6,8 @@ use Redis;
 
 class CoasterRepository
 {
-    private Redis $redis;
-
-    public function __construct()
+    public function __construct(private readonly Redis $redis)
     {
-        $this->redis = new Redis();
-        $this->redis->connect(getenv('REDIS_HOST'), getenv('REDIS_PORT'));
     }
 
     /**
@@ -19,6 +15,7 @@ class CoasterRepository
      *
      * @param array $data Dane kolejki.
      * @return string ID nowo utworzonej kolejki.
+     * @throws \RedisException
      */
     public function create(array $data): string
     {
@@ -33,5 +30,31 @@ class CoasterRepository
         ]);
 
         return $coasterId;
+    }
+
+    /**
+     * Sprawdza, czy kolejka o podanym ID istnieje.
+     *
+     * @param string $coasterId
+     * @return bool
+     * @throws \RedisException
+     */
+    public function exists(string $coasterId): bool
+    {
+        return (bool)$this->redis->exists($coasterId);
+    }
+
+    /**
+     * Pobiera dane kolejki o podanym ID.
+     *
+     * @param string $coasterId
+     * @return array|null
+     * @throws \RedisException
+     */
+    public function find(string $coasterId): ?array
+    {
+        $data = $this->redis->hGetAll($coasterId);
+
+        return $data ?: null;
     }
 }

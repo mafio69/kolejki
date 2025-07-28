@@ -32,11 +32,12 @@ Jest to projekt API do zarządzania systemem kolejek górskich, oparty o specyfi
 - ✅ **Konfiguracja Logowania:** Dostosowanie poziomów logowania dla `dev` i `prod`.
 - ✅ **Konfiguracja Xdebug:** Włączenie Xdebug tylko dla środowiska deweloperskiego.
 
-### Faza 1: Implementacja Podstawowego API (Backend)
-1.  **Modelowanie Danych:** Zdefiniowanie klas/serwisów do interakcji z Redisem dla kolejek i wagonów.
-2.  **Implementacja Kontrolerów API:** Stworzenie kontrolerów dla endpointów (`POST /coasters`, `POST /coasters/{id}/wagons`, etc.).
-3.  **Routing:** Konfiguracja `app/Config/Routes.php`.
-4.  **Walidacja Danych Wejściowych:** Dodanie walidacji dla żądań.
+### Faza 1: Implementacja Podstawowego API (Backend) (Ukończona)
+- ✅ **Modelowanie Danych:** Zdefiniowanie klas/serwisów do interakcji z Redisem dla kolejek i wagonów.
+- ✅ **Implementacja Kontrolerów API:** Stworzenie kontrolerów dla endpointów (`POST /coasters`, `POST /coasters/{id}/wagons`, etc.).
+- ✅ **Routing:** Konfiguracja `app/Config/Routes.php`.
+- ✅ **Walidacja Danych Wejściowych:** Dodanie walidacji dla żądań.
+- ✅ **Refaktoryzacja (SOLID):** Zastosowanie wstrzykiwania zależności.
 
 ### Faza 2: Implementacja Logiki Biznesowej
 1.  **Zarządzanie Personelem:** Obliczanie wymaganego i dostępnego personelu.

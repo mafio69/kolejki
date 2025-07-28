@@ -6,12 +6,8 @@ use Redis;
 
 class WagonRepository
 {
-    private Redis $redis;
-
-    public function __construct()
+    public function __construct(private readonly Redis $redis)
     {
-        $this->redis = new Redis();
-        $this->redis->connect(getenv('REDIS_HOST'), getenv('REDIS_PORT'));
     }
 
     /**
@@ -20,6 +16,7 @@ class WagonRepository
      * @param string $coasterId ID kolejki.
      * @param array $data Dane wagonu.
      * @return string ID nowo utworzonego wagonu.
+     * @throws \RedisException
      */
     public function add(string $coasterId, array $data): string
     {
@@ -43,6 +40,7 @@ class WagonRepository
      * @param string $coasterId ID kolejki.
      * @param string $wagonId ID wagonu.
      * @return bool
+     * @throws \RedisException
      */
     public function remove(string $coasterId, string $wagonId): bool
     {
@@ -51,5 +49,18 @@ class WagonRepository
 
         // Usuwamy dane wagonu
         return (bool)$this->redis->del($wagonId);
+    }
+
+    /**
+     * Sprawdza, czy wagon o podanym ID istnieje w kontekście danej kolejki.
+     *
+     * @param string $coasterId
+     * @param string $wagonId
+     * @return bool
+     * @throws \RedisException
+     */
+    public function exists(string $coasterId, string $wagonId): bool
+    {
+        return $this->redis->sIsMember($coasterId . ':wagons', $wagonId);
     }
 }
