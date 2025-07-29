@@ -28,7 +28,13 @@ class Services extends BaseService
         if ($getShared) {
             return static::getSharedInstance('redis');
         }
+        if (!extension_loaded('redis')) {
+            throw new \RuntimeException('Redis extension is not loaded.');
+        }
 
+        if (!getenv('REDIS_HOST') || !getenv('REDIS_PORT')) {
+            throw new \RuntimeException('Redis host and port must be set in environment variables.');
+        }
         $redis = new Redis();
         $redis->connect(getenv('REDIS_HOST'), getenv('REDIS_PORT'));
 

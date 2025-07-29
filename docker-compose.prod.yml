@@ -1,4 +1,8 @@
 services:
   php:
+    build:
+      context: ./docker/php
+      args:
+        - APP_ENV=production
     environment:
       - CI_ENVIRONMENT=production

@@ -4,6 +4,7 @@ POST http://localhost:8080/api/coasters
 Content-Type: application/json
 
 {
+  "nazwa": "Test Coaster",
   "liczba_personelu": 16,
   "liczba_klientow": 60000,
   "dl_trasy": 1800,

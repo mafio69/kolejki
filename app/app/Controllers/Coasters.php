@@ -3,16 +3,22 @@
 namespace App\Controllers;
 
 use App\Models\CoasterRepository;
+use App\Services\PersonnelService;
+use App\Services\PerformanceService;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 
 class Coasters extends BaseController
 {
     private CoasterRepository $coasterRepository;
+    private PersonnelService $personnelService;
+    private PerformanceService $performanceService;
 
     public function __construct()
     {
         $this->coasterRepository = service('coasterRepository');
+        $this->personnelService = new PersonnelService();
+        $this->performanceService = new PerformanceService();
     }
 
     /**
@@ -26,6 +32,7 @@ class Coasters extends BaseController
 
         $validation = Services::validation();
         $validation->setRules([
+            'nazwa' => 'required|string',
             'liczba_personelu' => 'required|integer',
             'liczba_klientow' => 'required|integer',
             'dl_trasy' => 'required|integer',

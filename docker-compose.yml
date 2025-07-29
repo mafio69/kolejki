@@ -4,12 +4,14 @@ services:
   php:
     build:
       context: ./docker/php
+      args:
+        - APP_ENV=$APP_ENV
+    image: coaster_php
     container_name: coaster_php
     volumes:
       - ./app:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     environment:
-      
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - APP_ENV=development # oddzielny env dla CI i aplikacji
