@@ -14,7 +14,7 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - APP_ENV=development # oddzielny env dla CI i aplikacji
+      - APP_ENV=$APP_ENV # oddzielny env dla CI i aplikacji
     depends_on:
       - redis
     networks:

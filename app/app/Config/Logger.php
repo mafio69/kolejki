@@ -36,9 +36,36 @@ class Logger extends BaseConfig
      * For a live site you'll usually enable Critical or higher (3) to be logged otherwise
      * your log files will fill up very fast.
      *
+     * Environment-specific thresholds:
+     * - production: Runtime Errors (4) and Warnings (5) by default
+     * - development: All Messages (9) by default
+     * - testing: All Messages (9) by default
+     *
+     * These defaults can be overridden by setting logger.threshold in your .env file.
+     * For example, to log only Emergency and Alert messages in production:
+     *   logger.threshold=2
+     *
      * @var int|list<int>
      */
-    public $threshold = (ENVIRONMENT === 'production') ? [4, 5] : 9;
+    public $threshold;
+    
+    public function __construct()
+    {
+        parent::__construct();
+        
+        // Set default thresholds based on environment if not overridden in .env
+        if (!isset($this->threshold)) {
+            if (ENVIRONMENT === 'production') {
+                $this->threshold = [3, 4, 5]; // Include Critical, Runtime Errors, and Warnings in production
+            } elseif (ENVIRONMENT === 'development') {
+                $this->threshold = 9; // All messages in development
+            } elseif (ENVIRONMENT === 'testing') {
+                $this->threshold = 9; // All messages in testing
+            } else {
+                $this->threshold = 9; // Default to all messages for any other environment
+            }
+        }
+    }
 
     /**
      * --------------------------------------------------------------------------
