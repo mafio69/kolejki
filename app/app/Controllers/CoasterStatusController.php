@@ -3,15 +3,18 @@
 namespace App\Controllers;
 
 use App\Services\CoasterService;
+use App\Services\PersonnelService;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class CoasterStatusController extends BaseController
 {
     private CoasterService $coasterService;
+    private PersonnelService $personnelService;
 
     public function __construct()
     {
         $this->coasterService = service('coasterService');
+        $this->personnelService = new PersonnelService();
     }
 
     /**
@@ -30,6 +33,11 @@ class CoasterStatusController extends BaseController
                 'message' => 'Kolejka o podanym ID nie istnieje.',
             ])->setStatusCode(ResponseInterface::HTTP_NOT_FOUND);
         }
+
+        $requiredPersonnel = $this->personnelService->calculateRequiredPersonnel(count($coasterDetails['wagons'] ?? []));
+        $personnelStatus = $this->personnelService->checkPersonnel($requiredPersonnel, $coasterDetails['liczba_personelu']);
+
+        $coasterDetails['personnel_status'] = $personnelStatus;
 
         return $this->response->setJSON([
             'status' => 'success',
