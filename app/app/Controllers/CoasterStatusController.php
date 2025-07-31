@@ -2,46 +2,33 @@
 
 namespace App\Controllers;
 
-use App\Services\CoasterService;
-use App\Services\PersonnelService;
+use App\Services\CoasterStatusService;
 use CodeIgniter\HTTP\ResponseInterface;
+use Exception;
 
 class CoasterStatusController extends BaseController
 {
-    private CoasterService $coasterService;
-    private PersonnelService $personnelService;
+    private CoasterStatusService $coasterStatusService;
 
     public function __construct()
     {
-        $this->coasterService = service('coasterService');
-        $this->personnelService = new PersonnelService();
+        $this->coasterStatusService = service('coasterStatusService');
     }
 
-    /**
-     * Zwraca status i szczegóły kolejki górskiej.
-     *
-     * @param string $coasterId ID kolejki.
-     * @return ResponseInterface
-     */
     public function show(string $coasterId): ResponseInterface
     {
-        $coasterDetails = $this->coasterService->getCoasterDetails($coasterId);
+        try {
+            $coasterDetails = $this->coasterStatusService->getCoasterStatus($coasterId);
 
-        if (empty($coasterDetails)) {
+            return $this->response->setJSON([
+                'status' => 'success',
+                'data' => $coasterDetails,
+            ])->setStatusCode(ResponseInterface::HTTP_OK);
+        } catch (Exception $e) {
             return $this->response->setJSON([
                 'status' => 'error',
-                'message' => 'Kolejka o podanym ID nie istnieje.',
-            ])->setStatusCode(ResponseInterface::HTTP_NOT_FOUND);
+                'message' => $e->getMessage(),
+            ])->setStatusCode($e->getCode());
         }
-
-        $requiredPersonnel = $this->personnelService->calculateRequiredPersonnel(count($coasterDetails['wagons'] ?? []));
-        $personnelStatus = $this->personnelService->checkPersonnel($requiredPersonnel, $coasterDetails['liczba_personelu']);
-
-        $coasterDetails['personnel_status'] = $personnelStatus;
-
-        return $this->response->setJSON([
-            'status' => 'success',
-            'data' => $coasterDetails,
-        ])->setStatusCode(ResponseInterface::HTTP_OK);
     }
 }

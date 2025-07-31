@@ -9,6 +9,22 @@ Upewnij się, że masz zainstalowane:
 *   Docker
 *   Docker Compose
 
+## Struktura projektu
+
+*   `app/`: Główny kod aplikacji (CodeIgniter 4), zawierający również testy (`app/tests`).
+*   `docker/`: Konfiguracja kontenerów Docker (Nginx, PHP, Redis, MySQL).
+*   `documentation/`: Dokumentacja projektu, w tym oryginalna specyfikacja zadania.
+*   `logs/`: Logi generowane przez aplikację i usługi.
+*   `performance-tests/`: Skrypty do testów wydajnościowych (k6).
+
+## Konfiguracja środowiska
+
+Przed pierwszym uruchomieniem, skopiuj plik `example.env` do `.env` i dostosuj zmienne środowiskowe w razie potrzeby:
+
+```bash
+cp example.env .env
+```
+
 ## Uruchomienie środowiska deweloperskiego
 
 Aby uruchomić wszystkie usługi (PHP-FPM, Nginx, Redis):
@@ -21,6 +37,20 @@ Usługi będą dostępne pod następującymi adresami:
 
 *   **Nginx (aplikacja PHP):** http://localhost:8080
 *   **Redis:** Dostępny wewnętrznie dla kontenerów Docker.
+*   **MySQL:** Dostępny wewnętrznie dla kontenerów Docker.
+
+## Dostępne endpointy API
+
+### Kolejki górskie (`/api/coasters`)
+
+*   `POST /api/coasters`: Tworzy nową kolejkę górską.
+*   `GET /api/coasters/{id}/status`: Zwraca status i szczegóły kolejki górskiej.
+
+### Wagony (`/api/coasters/{id}/wagons`)
+
+*   `POST /api/coasters/{id}/wagons`: Dodaje nowy wagon do kolejki.
+*   `DELETE /api/coasters/{id}/wagons/{wagonId}`: Usuwa wagon z kolejki.
+
 
 ## Uruchomienie komendy monitorującej
 

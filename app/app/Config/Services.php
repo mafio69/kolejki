@@ -7,6 +7,8 @@ use App\Libraries\RedisClientInterface;
 use App\Models\CoasterRepository;
 use App\Models\WagonRepository;
 use App\Services\CoasterService;
+use App\Services\CoasterStatusService;
+use App\Services\WagonService;
 use CodeIgniter\Config\BaseService;
 use Clue\React\Redis\RedisClient;
 use React\EventLoop\Loop;
@@ -83,5 +85,23 @@ class Services extends BaseService
         }
 
         return new CoasterService(self::coasterRepository());
+    }
+
+    public static function wagonService($getShared = true): object
+    {
+        if ($getShared) {
+            return static::getSharedInstance('wagonService');
+        }
+
+        return new WagonService();
+    }
+
+    public static function coasterStatusService($getShared = true): object
+    {
+        if ($getShared) {
+            return static::getSharedInstance('coasterStatusService');
+        }
+
+        return new CoasterStatusService(self::coasterService(), new \App\Services\PersonnelService());
     }
 }
