@@ -27,7 +27,7 @@ class Kint
     /**
      * @var list<class-string<ConstructablePluginInterface>|ConstructablePluginInterface>|null
      */
-    public $plugins;
+    public ?array $plugins;
 
     public int $maxDepth           = 6;
     public bool $displayCalledFrom = true;
@@ -44,12 +44,12 @@ class Kint
     /**
      * @var array<string, class-string<ValuePluginInterface>>|null
      */
-    public $richObjectPlugins;
+    public ?array $richObjectPlugins;
 
     /**
      * @var array<string, class-string<TabPluginInterface>>|null
      */
-    public $richTabPlugins;
+    public ?array $richTabPlugins;
 
     /*
     |--------------------------------------------------------------------------

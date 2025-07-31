@@ -142,7 +142,6 @@ $errorId = uniqid('error', true);
                             <?php if (! isset($row['class']) && isset($row['function'])) : ?>
                                 &nbsp;&nbsp;&mdash;&nbsp;&nbsp;    <?= esc($row['function']) ?>()
                             <?php endif; ?>
-                        </p>
 
                         <!-- Source? -->
                         <?php if (isset($row['file']) && is_file($row['file']) && isset($row['class'])) : ?>
@@ -320,14 +319,14 @@ $errorId = uniqid('error', true);
                         <tbody>
                         <?php foreach ($headers as $name => $value) : ?>
                             <tr>
-                                <td><?= esc($name, 'html') ?></td>
+                                <td><?= esc($name) ?></td>
                                 <td>
                                 <?php
                                 if ($value instanceof Header) {
-                                    echo esc($value->getValueLine(), 'html');
+                                    echo esc($value->getValueLine());
                                 } else {
                                     foreach ($value as $i => $header) {
-                                        echo ' ('. $i+1 . ') ' . esc($header->getValueLine(), 'html');
+                                        echo ' ('. $i+1 . ') ' . esc($header->getValueLine());
                                     }
                                 }
                                 ?>
@@ -367,14 +366,14 @@ $errorId = uniqid('error', true);
                         <tbody>
                         <?php foreach ($headers as $name => $value) : ?>
                             <tr>
-                                <td><?= esc($name, 'html') ?></td>
+                                <td><?= esc($name) ?></td>
                                 <td>
                                 <?php
                                 if ($value instanceof Header) {
-                                    echo esc($response->getHeaderLine($name), 'html');
+                                    echo esc($response->getHeaderLine($name));
                                 } else {
                                     foreach ($value as $i => $header) {
-                                        echo ' ('. $i+1 . ') ' . esc($header->getValueLine(), 'html');
+                                        echo ' ('. $i+1 . ') ' . esc($header->getValueLine());
                                     }
                                 }
                                 ?>
@@ -405,11 +404,11 @@ $errorId = uniqid('error', true);
                     <tbody>
                         <tr>
                             <td>Memory Usage</td>
-                            <td><?= esc(static::describeMemory(memory_get_usage(true))) ?></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td style="width: 12em">Peak Memory Usage:</td>
-                            <td><?= esc(static::describeMemory(memory_get_peak_usage(true))) ?></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>Memory Limit:</td>

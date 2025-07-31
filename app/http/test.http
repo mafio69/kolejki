@@ -1,9 +1,11 @@
+
 ### Tworzenie nowej kolejki górskiej
 # Zapisuje ID nowej kolejki do zmiennej `coaster_id`
 POST http://localhost:8080/api/coasters
 Content-Type: application/json
 
 {
+  "nazwa": "Test Coaster",
   "liczba_personelu": 16,
   "liczba_klientow": 60000,
   "dl_trasy": 1800,
@@ -63,6 +65,19 @@ DELETE http://localhost:8080/api/coasters/{{coaster_id}}/wagons/nieistniejace-id
 
 ### Pobieranie statusu kolejki
 GET http://localhost:8080/api/coasters/{{coaster_id}}/status
+
+> {% 
+    client.test("Pobieranie statusu - sprawdzenie statusu personelu", function() {
+        client.assert(response.status === 200, "Status odpowiedzi powinien byÄ‡ 200 OK");
+        const body = response.body;
+        client.assert(body.status === "success", "Status w odpowiedzi powinien byÄ‡ 'success'");
+        client.assert(body.data.hasOwnProperty("personnel_status"), "OdpowiedÅº powinna zawieraÄ‡ 'personnel_status'");
+        const personnelStatus = body.data.personnel_status;
+        client.assert(personnelStatus.status === "warning", "Status personelu powinien byÄ‡ 'warning'");
+        client.assert(personnelStatus.surplus === 15, "Nadmiar personelu powinien wynosiÄ‡ 15");
+    });
+%}
+
 
 ###
 

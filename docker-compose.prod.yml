@@ -2,3 +2,111 @@ services:
   php:
     environment:
       - CI_ENVIRONMENT=production
+      - PHP_FPM_PM=dynamic
+      - PHP_FPM_PM_MAX_CHILDREN=100
+      - PHP_FPM_PM_START_SERVERS=20
+      - PHP_FPM_PM_MIN_SPARE_SERVERS=10
+      - PHP_FPM_PM_MAX_SPARE_SERVERS=30
+      - PHP_FPM_MAX_REQUESTS=1000
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine  # Lżejsza wersja
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    restart: unless-stopped
+    # Dodatkowe zabezpieczenia
+    security_opt:
+      - no-new-privileges:true
+    # Limity dla nginx
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    volumes:
+      - redis_data:/data:rw
+    restart: unless-stopped
+
+  # Dodanie load balancera
+  haproxy:
+    image: haproxy:2.8-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/haproxy:/usr/local/etc/haproxy:ro
+      - ./docker/certs:/certs:ro
+    depends_on:
+      - nginx
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    restart: unless-stopped
+
+  # Monitoring produkcyjny
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - prometheus_data:/prometheus
+      - ./docker/prometheus/prometheus-prod.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=30d'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    restart: unless-stopped
+    ports:
+      - "9090:9090"  # Standardowy port Prometheus UI
+
+  # System logowania
+  logstash:
+    image: logstash:8.11.1
+    volumes:
+      - ./docker/logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./logs:/logs
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+
+networks:
+  coaster_net:
+    driver: overlay
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16

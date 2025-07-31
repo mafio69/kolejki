@@ -2,10 +2,14 @@
 
 namespace Config;
 
+use App\Libraries\RedisClientAdapter;
+use App\Libraries\RedisClientInterface;
 use App\Models\CoasterRepository;
 use App\Models\WagonRepository;
 use App\Services\CoasterService;
 use CodeIgniter\Config\BaseService;
+use Clue\React\Redis\RedisClient;
+use React\EventLoop\Loop;
 use Redis;
 
 /**
@@ -23,12 +27,31 @@ use Redis;
  */
 class Services extends BaseService
 {
+    public static function redisClient($getShared = true): object
+    {
+        if ($getShared) {
+            return static::getSharedInstance('redisClient');
+        }
+
+        $redisHost = getenv('REDIS_HOST') ?: '127.0.0.1';
+        $redisPort = getenv('REDIS_PORT') ?: 6379;
+        $client = new RedisClient($redisHost . ':' . $redisPort);
+
+        return new RedisClientAdapter($client);
+    }
+
     public static function redis($getShared = true): object
     {
         if ($getShared) {
             return static::getSharedInstance('redis');
         }
+        if (!extension_loaded('redis')) {
+            throw new \RuntimeException('Redis extension is not loaded.');
+        }
 
+        if (!getenv('REDIS_HOST') || !getenv('REDIS_PORT')) {
+            throw new \RuntimeException('Redis host and port must be set in environment variables.');
+        }
         $redis = new Redis();
         $redis->connect(getenv('REDIS_HOST'), getenv('REDIS_PORT'));
 

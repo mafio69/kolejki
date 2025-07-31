@@ -1,3 +1,7 @@
+# Wytyczne
+* Nazwy i cały kod po angielsku
+* Komentarze w języku polskim
+
 # Projekt: System Kolejek Górskich
 
 Jest to projekt API do zarządzania systemem kolejek górskich, oparty o specyfikację z pliku `documentation/Zadanie testowe - PHP Backend Developer.pdf`.
@@ -39,10 +43,12 @@ Jest to projekt API do zarządzania systemem kolejek górskich, oparty o specyfi
 - ✅ **Walidacja Danych Wejściowych:** Dodanie walidacji dla żądań.
 - ✅ **Refaktoryzacja (SOLID):** Zastosowanie wstrzykiwania zależności.
 
-### Faza 2: Implementacja Logiki Biznesowej
-1.  **Zarządzanie Personelem:** Obliczanie wymaganego i dostępnego personelu.
+### Faza 2: Implementacja Logiki Biznesowej (Ukończona)
+1.  ✅ **Zarządzanie Personelem:** Obliczanie wymaganego i dostępnego personelu.
 2.  **Zarządzanie Wydajnością:** Obliczanie zdolności obsługi klientów.
 3.  **System Powiadomień:** Logowanie problemów (brak personelu, wagonów) jako `warning` lub `error`.
+
+### Faza 3: Asynchroniczna Konsola Monitorująca (CLI) (Obecna Faza)
 
 ### Faza 3: Asynchroniczna Konsola Monitorująca (CLI)
 1.  **Stworzenie Komendy CLI:** Użycie `php spark` do stworzenia komendy `monitor:status`.

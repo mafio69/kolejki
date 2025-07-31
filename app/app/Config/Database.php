@@ -1,14 +1,32 @@
 <?php
+// app/app/Config/Database.php
 
 namespace Config;
 
 use CodeIgniter\Database\Config;
 
-/**
- * Database Configuration
- */
 class Database extends Config
 {
+    public array $default = [
+        'DSN'      => '',
+        'hostname' => 'mysql',  // nazwa kontenera mysql
+        'username' => 'coaster_user',
+        'password' => 'coaster_password',
+        'database' => 'coaster',
+        'DBDriver' => 'MySQLi',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug'  => true,
+        'charset'  => 'utf8',
+        'DBCollat' => 'utf8_general_ci',
+        'swapPre'  => '',
+        'encrypt'  => false,
+        'compress' => false,
+        'strictOn' => false,
+        'failover' => [],
+        'port'     => 3306,
+    ];
+    
     /**
      * The directory that holds the Migrations and Seeds directories.
      */
@@ -24,32 +42,32 @@ class Database extends Config
      *
      * @var array<string, mixed>
      */
-    public array $default = [
-        'DSN'          => '',
-        'hostname'     => 'localhost',
-        'username'     => '',
-        'password'     => '',
-        'database'     => '',
-        'DBDriver'     => 'MySQLi',
-        'DBPrefix'     => '',
-        'pConnect'     => false,
-        'DBDebug'      => true,
-        'charset'      => 'utf8mb4',
-        'DBCollat'     => 'utf8mb4_general_ci',
-        'swapPre'      => '',
-        'encrypt'      => false,
-        'compress'     => false,
-        'strictOn'     => false,
-        'failover'     => [],
-        'port'         => 3306,
-        'numberNative' => false,
-        'foundRows'    => false,
-        'dateFormat'   => [
-            'date'     => 'Y-m-d',
-            'datetime' => 'Y-m-d H:i:s',
-            'time'     => 'H:i:s',
-        ],
-    ];
+    // public array $default = [
+    //     'DSN'          => '',
+    //     'hostname'     => 'myphp spark make:model UserModelsql',
+    //     'username'     => '',
+    //     'password'     => '',
+    //     'database'     => '',
+    //     'DBDriver'     => 'MySQLi',
+    //     'DBPrefix'     => '',
+    //     'pConnect'     => false,
+    //     'DBDebug'      => true,
+    //     'charset'      => 'utf8mb4',
+    //     'DBCollat'     => 'utf8mb4_general_ci',
+    //     'swapPre'      => '',
+    //     'encrypt'      => false,
+    //     'compress'     => false,
+    //     'strictOn'     => false,
+    //     'failover'     => [],
+    //     'port'         => 3306,
+    //     'numberNative' => false,
+    //     'foundRows'    => false,
+    //     'dateFormat'   => [
+    //         'date'     => 'Y-m-d',
+    //         'datetime' => 'Y-m-d H:i:s',
+    //         'time'     => 'H:i:s',
+    //     ],
+    // ];
 
     //    /**
     //     * Sample database connection for SQLite3.

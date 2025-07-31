@@ -47,28 +47,28 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string|null
      */
-    public $defaultSrc;
+    public string|array|null $defaultSrc;
 
     /**
      * Lists allowed scripts' URLs.
      *
      * @var list<string>|string
      */
-    public $scriptSrc = 'self';
+    public string|array $scriptSrc = 'self';
 
     /**
      * Lists allowed stylesheets' URLs.
      *
      * @var list<string>|string
      */
-    public $styleSrc = 'self';
+    public string|array $styleSrc = 'self';
 
     /**
      * Defines the origins from which images can be loaded.
      *
      * @var list<string>|string
      */
-    public $imageSrc = 'self';
+    public string|array $imageSrc = 'self';
 
     /**
      * Restricts the URLs that can appear in a page's `<base>` element.
@@ -77,14 +77,14 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string|null
      */
-    public $baseURI;
+    public string|array|null $baseURI;
 
     /**
      * Lists the URLs for workers and embedded frame contents
      *
      * @var list<string>|string
      */
-    public $childSrc = 'self';
+    public string|array $childSrc = 'self';
 
     /**
      * Limits the origins that you can connect to (via XHR,
@@ -92,21 +92,21 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string
      */
-    public $connectSrc = 'self';
+    public string|array $connectSrc = 'self';
 
     /**
      * Specifies the origins that can serve web fonts.
      *
      * @var list<string>|string
      */
-    public $fontSrc;
+    public string|array $fontSrc;
 
     /**
      * Lists valid endpoints for submission from `<form>` tags.
      *
      * @var list<string>|string
      */
-    public $formAction = 'self';
+    public string|array $formAction = 'self';
 
     /**
      * Specifies the sources that can embed the current page.
@@ -116,7 +116,7 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string|null
      */
-    public $frameAncestors;
+    public string|array|null $frameAncestors;
 
     /**
      * The frame-src directive restricts the URLs which may
@@ -124,40 +124,40 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string|null
      */
-    public $frameSrc;
+    public string|array|null $frameSrc;
 
     /**
      * Restricts the origins allowed to deliver video and audio.
      *
      * @var list<string>|string|null
      */
-    public $mediaSrc;
+    public string|array|null $mediaSrc;
 
     /**
      * Allows control over Flash and other plugins.
      *
      * @var list<string>|string
      */
-    public $objectSrc = 'self';
+    public string|array $objectSrc = 'self';
 
     /**
      * @var list<string>|string|null
      */
-    public $manifestSrc;
+    public string|array|null $manifestSrc;
 
     /**
      * Limits the kinds of plugins a page may invoke.
      *
      * @var list<string>|string|null
      */
-    public $pluginTypes;
+    public string|array|null $pluginTypes;
 
     /**
      * List of actions allowed.
      *
      * @var list<string>|string|null
      */
-    public $sandbox;
+    public string|array|null $sandbox;
 
     /**
      * Nonce tag for style

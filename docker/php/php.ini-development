@@ -1,0 +1,23 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Error Handling & Logging Settings   ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Display Settings
+display_errors = On
+display_startup_errors = On
+
+; Logging Configuration
+log_errors = On
+log_errors_max_len = 1024
+error_log = /var/www/html/writable/logs/dev/php_errors_dev.log
+
+; Error Reporting Level
+error_reporting = E_ALL & ~E_DEPRECATED
+
+; Error Repetition Control
+ignore_repeated_errors = Off
+ignore_repeated_source = Off
+report_memleaks = On
+
+; Memory Limit
+memory_limit = -1

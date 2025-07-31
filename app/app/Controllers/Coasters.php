@@ -19,6 +19,8 @@ class Coasters extends BaseController
      * Tworzy nową kolejkę górską.
      *
      * @return ResponseInterface
+     * @throws \RedisException
+     * @throws \RedisException
      */
     public function create(): ResponseInterface
     {
@@ -26,6 +28,7 @@ class Coasters extends BaseController
 
         $validation = Services::validation();
         $validation->setRules([
+            'nazwa' => 'required|string',
             'liczba_personelu' => 'required|integer',
             'liczba_klientow' => 'required|integer',
             'dl_trasy' => 'required|integer',
