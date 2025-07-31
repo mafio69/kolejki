@@ -45,17 +45,17 @@ Jest to projekt API do zarządzania systemem kolejek górskich, oparty o specyfi
 
 ### Faza 2: Implementacja Logiki Biznesowej (Ukończona)
 1.  ✅ **Zarządzanie Personelem:** Obliczanie wymaganego i dostępnego personelu.
-2.  **Zarządzanie Wydajnością:** Obliczanie zdolności obsługi klientów.
-3.  **System Powiadomień:** Logowanie problemów (brak personelu, wagonów) jako `warning` lub `error`.
+2.  ✅ **Zarządzanie Wydajnością:** Obliczanie zdolności obsługi klientów.
+3.  ✅ **System Powiadomień:** Logowanie problemów (brak personelu, wagonów) jako `warning` lub `error`.
 
 ### Faza 3: Asynchroniczna Konsola Monitorująca (CLI) (Obecna Faza)
 
 ### Faza 3: Asynchroniczna Konsola Monitorująca (CLI)
-1.  **Stworzenie Komendy CLI:** Użycie `php spark` do stworzenia komendy `monitor:status`.
-2.  **Pobieranie Danych z Redis:** Łączenie z Redisem i pobieranie danych w czasie rzeczywistym.
-3.  **Wyświetlanie Statystyk:** Formatowanie i cykliczne wyświetlanie danych w konsoli.
+1.  ✅ **Stworzenie Komendy CLI:** Użycie `php spark` do stworzenia komendy `monitor:status`.
+2.  ✅ **Pobieranie Danych z Redis:** Łączenie z Redisem i pobieranie danych w czasie rzeczywistym.
+3.  ✅ **Wyświetlanie Statystyk:** Formatowanie i cykliczne wyświetlanie danych w konsoli.
 
 ### Faza 4: Testy i Finalizacja
-1.  **Testy Jednostkowe i Funkcjonalne:** Pisanie testów PHPUnit dla logiki i API.
-2.  **Testy Integracyjne:** Manualne testowanie całego przepływu.
-3.  **Dokumentacja:** Przygotowanie `README.md` z instrukcją uruchomienia.
+1.  ✅ **Testy Jednostkowe i Funkcjonalne:** Pisanie testów PHPUnit dla logiki i API.
+2.  ✅ **Testy Integracyjne:** Manualne testowanie całego przepływu.
+3.  ✅ **Dokumentacja:** Przygotowanie `README.md` z instrukcją uruchomienia.

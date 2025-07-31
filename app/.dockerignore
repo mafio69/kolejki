@@ -1,0 +1,13 @@
+vendor/
+node_modules/
+.git/
+.github/
+.env*
+!.env.example
+tests/
+public/uploads/
+writable/cache/
+writable/logs/
+writable/session/
+writable/uploads/
+writable/debugbar/

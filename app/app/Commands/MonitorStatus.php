@@ -22,7 +22,7 @@ class MonitorStatus extends BaseCommand
         return Services::redisClient();
     }
 
-    public function run(array $params)
+    public function run(array $params): void
     {
         $loop = Loop::get();
 
@@ -53,7 +53,7 @@ class MonitorStatus extends BaseCommand
         Loop::get()->stop();
     }
 
-    private function fetchAndDisplayCoasterStatus(RedisClientInterface $client)
+    private function fetchAndDisplayCoasterStatus(RedisClientInterface $client): void
     {
         $client->keys('coaster:*')->then(function ($keys) use ($client) {
             $coasterKeys = array_filter($keys, fn($key) => !str_contains($key, ':wagons'));
@@ -78,7 +78,7 @@ class MonitorStatus extends BaseCommand
         });
     }
 
-    private function displayCoasterInfo(RedisClientInterface $client, string $coasterId, array $coasterData)
+    private function displayCoasterInfo(RedisClientInterface $client, string $coasterId, array $coasterData): void
     {
         $personnelService = new PersonnelService();
         $performanceService = new PerformanceService();
@@ -125,7 +125,7 @@ class MonitorStatus extends BaseCommand
         });
     }
 
-    private function logProblem(string $coasterId, string $problem)
+    private function logProblem(string $coasterId, string $problem): void
     {
         log_message('warning', sprintf('Kolejka %s - %s', $coasterId, $problem));
     }
