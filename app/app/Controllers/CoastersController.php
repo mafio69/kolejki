@@ -6,7 +6,7 @@ use App\Models\CoasterRepository;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 
-class Coasters extends BaseController
+class CoastersController extends BaseController
 {
     private CoasterRepository $coasterRepository;
 
