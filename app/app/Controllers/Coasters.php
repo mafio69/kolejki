@@ -19,6 +19,8 @@ class Coasters extends BaseController
      * Tworzy nową kolejkę górską.
      *
      * @return ResponseInterface
+     * @throws \RedisException
+     * @throws \RedisException
      */
     public function create(): ResponseInterface
     {

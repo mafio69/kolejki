@@ -23,6 +23,8 @@ class Wagons extends BaseController
      *
      * @param string $coasterId ID kolejki, do której dodajemy wagon.
      * @return ResponseInterface
+     * @throws \RedisException
+     * @throws \RedisException
      */
     public function add(string $coasterId): ResponseInterface
     {
@@ -65,6 +67,8 @@ class Wagons extends BaseController
      * @param string $coasterId ID kolejki.
      * @param string $wagonId ID wagonu do usunięcia.
      * @return ResponseInterface
+     * @throws \RedisException
+     * @throws \RedisException
      */
     public function remove(string $coasterId, string $wagonId): ResponseInterface
     {

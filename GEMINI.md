@@ -1,3 +1,7 @@
+# Wytyczne
+* Nazwy i cały kod po angielsku
+* Komentarze w języku polskim
+
 # Projekt: System Kolejek Górskich
 
 Jest to projekt API do zarządzania systemem kolejek górskich, oparty o specyfikację z pliku `documentation/Zadanie testowe - PHP Backend Developer.pdf`.

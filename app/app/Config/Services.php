@@ -2,10 +2,14 @@
 
 namespace Config;
 
+use App\Libraries\RedisClientAdapter;
+use App\Libraries\RedisClientInterface;
 use App\Models\CoasterRepository;
 use App\Models\WagonRepository;
 use App\Services\CoasterService;
 use CodeIgniter\Config\BaseService;
+use Clue\React\Redis\RedisClient;
+use React\EventLoop\Loop;
 use Redis;
 
 /**
@@ -23,6 +27,19 @@ use Redis;
  */
 class Services extends BaseService
 {
+    public static function redisClient($getShared = true): object
+    {
+        if ($getShared) {
+            return static::getSharedInstance('redisClient');
+        }
+
+        $redisHost = getenv('REDIS_HOST') ?: '127.0.0.1';
+        $redisPort = getenv('REDIS_PORT') ?: 6379;
+        $client = new RedisClient($redisHost . ':' . $redisPort);
+
+        return new RedisClientAdapter($client);
+    }
+
     public static function redis($getShared = true): object
     {
         if ($getShared) {

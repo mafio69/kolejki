@@ -47,7 +47,7 @@ class Logger extends BaseConfig
      *
      * @var int|list<int>
      */
-    public $threshold;
+    public int|array $threshold;
     
     public function __construct()
     {

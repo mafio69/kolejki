@@ -1,4 +1,4 @@
-error_log = /var/www/html/writable/logs/php_errors_prod.log
+error_log = /var/www/html/writable/logs/prod/php_errors_prod.log
 error_reporting = ERROR | E_WARNING | E_PARSE
 display_errors = Off
 display_startup_errors = Off

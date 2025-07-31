@@ -1,0 +1,18 @@
+parameters:
+    level: 5
+    paths:
+        - app
+        - tests
+    tmpDir: build/phpstan
+    ignoreErrors:
+        - '#Constant .* not found.#'
+        - '#Function .* not found.#'
+        - '#Call to an undefined method .*#'
+        - '#PHPDoc type .* is not covariant with PHPDoc type .* of overridden property .*#'
+        - '#Property .* has unknown class .* as its type.#'
+        
+        - '#Parameter .* of method .* expects .* given.#'
+        - '#Calling static::highlightFile\(\) outside of class scope.#'
+        - '#Variable .* might not be defined.#'
+        - '#Left side of && is always true.#'
+        - '#Right side of && is always true.#'
