@@ -83,3 +83,17 @@ GET http://localhost:8080/api/coasters/{{coaster_id}}/status
 
 ### BŁĄD - Pobieranie statusu nieistniejącej kolejki
 GET http://localhost:8080/api/coasters/nieistniejace-id/status
+
+###
+### BŁĄD - Pobieranie statusu nieistniejącej kolejki
+GET http://localhost:8080/api/coasters/nieistniejace-id/status
+# Zapytanie, które testuje walidację (powinno zwrócić błąd 400)
+Content-Type: application/json
+
+{
+  "liczba_personelu": "niepoprawnaliczba",
+  "liczba_klientow": 1000,
+  "dl_trasy": 500,
+  "godziny_od": "09:00",
+  "godziny_do": "18:00"
+}
