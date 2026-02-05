@@ -1,5 +1,5 @@
 # docker/php/Dockerfile
-FROM php:8.1-fpm
+FROM php:8.5.3RC1-fpm
 
 # Instalacja wymaganych rozszerzeń PHP
 RUN docker-php-ext-install mysqli pdo pdo_mysql pcntl
